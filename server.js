@@ -7,13 +7,26 @@
  *************************/
 const express = require("express")
 const env = require("dotenv").config()
+const expressLayouts = require("express-ejs-layouts")
 const app = express()
 const static = require("./routes/static")
+
+
 
 /* ***********************
  * Routes
  *************************/
 app.use(static)
+app.set("view engine", "ejs")
+// this two lines of code are writer 
+//to build up the webpage with the layout already done before
+app.use(expressLayouts)
+app.set("layout", "./layouts/layout") // not at views root
+
+// Index Route
+app.get("/", function(req,res){
+  res.render("index", {title:"server"})
+})
 
 /* ***********************
  * Local Server Information
