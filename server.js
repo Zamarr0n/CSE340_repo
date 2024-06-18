@@ -22,7 +22,6 @@ app.set("view engine", "ejs")
 //to build up the webpage with the layout already done before
 app.use(expressLayouts)
 app.set("layout", "./layouts/layout") // not at views root
-
 // Index Route
 app.get("/", function(req,res){
   res.render("index", {title:"server"})

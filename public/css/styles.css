@@ -3,4 +3,235 @@
 *:before,
 *:after {
   box-sizing: border-box;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+  margin-left: 2rem;
+  margin-right: 2rem;
+}
+#wrapper{
+  border: solid aqua;
+}
+
+.offer{
+  position: absolute;
+  bottom: 120px;
+  left: 300px;
+  justify-content: center;
+  width: 300px;
+  color: aqua;
+  background-color: rgba(255, 255, 255, 0.787);
+}
+.image{
+  display: flex;
+  justify-content: center;
+  width:950px;
+}
+.delorean_title{
+  font-size: 35px;
+}
+.delorean_text{
+  font-size: 25px;
+}
+.button_delorean{
+  cursor:pointer;
+  display: absolute;
+  width: 250px;
+}
+
+header{
+  display: flex;
+  justify-content:space-between;
+  padding-top: 1.5rem;
+  padding-bottom: 1.5rem;
+}
+header >span > a{
+  text-decoration: none;
+}
+header > div > a{
+  text-decoration: none;
+}
+h1{
+  color: navy;
+}
+.siteName{
+  font-size: xx-large;
+}
+.head{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+.nav{
+  background-color:gray;
+  display: flex;
+  flex-direction: row;
+  justify-content:space-around;
+  align-items: center;
+  padding-right: 2rem;
+  padding-left: 3rem;
+}
+.nav > li{
+  flex-direction: row;
+  display: flex;
+  list-style: none;
+  align-items: center;
+}
+.nav > li > a{  
+  display: flex;
+  text-decoration: none;
+  color: black;
+}
+.offer{
+  color: aqua;
+}
+.upgrades{
+  background-color: aqua;
+  display: flex;
+  justify-content: center;
+}
+
+.card > a{
+  display: flex;
+  justify-content: center;
+}
+#hero-img{
+  padding-bottom: 2rem;
+}
+#text-body{
+  display: grid;
+  grid-template-columns: 40% 60%;
+  grid-gap: 50px;
+  
+}
+#text-body > h2{
+  display: flex;
+  align-items: self-start;
+}
+.cards{
+  display: grid;
+  grid-template-columns: 150px 150px 150px 150px;
+}
+.title {
+  padding-bottom: 1rem;
+}
+.list{
+  display: flex;
+  flex-direction: column;
+}
+
+.list > p{
+  font-size: 20px;
+  width: 100%;
+  margin: auto;
+}
+
+@media only screen and (max-width: 900px){
+  *,
+*:before,
+*:after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+#wrapper{
+  border: none;
+}
+.nav{
+  background-color:gray;
+  display: grid;
+  grid-template-columns: auto auto auto auto auto;
+  grid-gap: 7vh;
+  justify-content: center;
+  padding: 1rem;
+  margin: 1rem;
+}
+.nav > li{
+  flex-direction: row;
+  display: flex;
+  list-style: none;
+  text-align: center;
+}
+.nav > li > a{  
+  display: flex;
+  text-decoration: none;
+  color: black;
+  text-align: center;
+}
+.head{
+  display: flex;
+  align-content: center;
+}
+  #text-body{ 
+  display: grid;
+  grid-template-columns: auto;
+  align-content: center;
+  align-items: center;
+  padding-top: 10rem;
+  margin: 0 auto;
+  }
+  .cards{
+    display: grid;
+    grid-template-columns: auto auto;
+    justify-content: center;
+    padding-bottom: 2rem;
+  }
+  .image{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width:500px;
+    height: 20px;
+    padding-top: 10rem;
+  }
+  .offer{
+    position: absolute;
+    bottom: 280px;
+    left: 40px;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+    width: 120px;
+    margin: 1rem ;
+    background-color: rgba(255, 255, 255, 0.787);
+  }
+  .delorean_title{
+    font-size:25px;
+  }
+  .delorean_text{
+    font-size:15px;
+  }
+  .button_delorean{
+    cursor:pointer;
+    display: absolute;
+    width: 110px;
+  }
+  .list>p{
+    display: flex;
+    flex-direction: column;
+    padding-bottom: 2rem;
+  }
+  .upgrades{
+    width:200px;
+    margin: 0 1rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .list_dmc{
+    margin: 0 auto;
+  }
+  #text-body > h2{
+    display: flex;
+    align-content: center;
+  }
+  .title {
+    padding-bottom: 1rem;
+    text-align: center;
+  }
+  #hero-img{
+    padding-bottom: 1rem;
+    display: flex;
+    justify-content: center;
+    text-align: center;
+  }
 }
