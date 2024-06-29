@@ -36,7 +36,7 @@ async function queryDetails(classification_id) {
       `SELECT inv_make, inv_model,inv_description, 
       inv_year, inv_color, inv_miles, inv_thumbnail
       FROM public.inventory 
-      WHERE classification_id = $1`,
+      WHERE inv_id = $1`,
       [classification_id]
     )
     console.log(details.rows[0]);

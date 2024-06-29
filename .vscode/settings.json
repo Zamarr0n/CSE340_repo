@@ -4,14 +4,14 @@
         {
             "pgOptions": {
                 "ssl": {
-                    "rejectUnauthorized": true
+                    "rejectUnauthorized": false
                 }
             },
             "previewLimit": 50,
             "server": "localhost",
             "driver": "PostgreSQL",
-            "name": "cse340 Database",
-            "connectString": "postgresql://_zamarr0n:AhmXwul19ZkFob4wZMrju1fGgUhZPINR@dpg-cps5ft56l47c73e09v50-a.virginia-postgres.render.com/zamarr0n"
+            "name": "zamarr0n_guhr",
+            "connectString": "postgresql://_zamarr0n_:40PLiHtOSqNHKaLSRzFydmXYHfjkTy1N@dpg-cpscr0aj1k6c738l6230-a.oregon-postgres.render.com/zamarr0n_guhr"
         }
     ]
 }

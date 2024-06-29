@@ -24,8 +24,8 @@ res.render("./inventory/classification", {
 // **********************************
 
 invCont.getDetails = async function (req, res, next) {
-    const classification_id = req.params.classificationId
-const data = await invModel.queryDetails(classification_id)
+    const car_id = req.params.carId
+const data = await invModel.queryDetails(car_id)
 const grid = await utilities.buildDetails(data)
 let nav = await utilities.getNav()
     res.render("./detail/details",{
