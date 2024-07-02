@@ -34,13 +34,13 @@ async function queryDetails(classification_id) {
   try{
     const details = await pool.query(
       `SELECT inv_make, inv_model,inv_description, 
-      inv_year, inv_color, inv_miles, inv_thumbnail
+      inv_year, inv_color, inv_miles, inv_thumbnail, inv_price
       FROM public.inventory 
       WHERE inv_id = $1`,
       [classification_id]
     )
-    console.log(details.rows[0]);
-    return details.rows[0];
+    console.log(details.rows);
+    return details.rows;
   } catch (error) {
     console.log("getDetails error " + error)
     

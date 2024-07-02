@@ -18,6 +18,8 @@ res.render("./inventory/classification", {
     grid,
 })
 }
+
+
 // **********************************
 // Week03:
 // Getting data function 
@@ -29,7 +31,7 @@ const data = await invModel.queryDetails(car_id)
 const grid = await utilities.buildDetails(data)
 let nav = await utilities.getNav()
     res.render("./detail/details",{
-        title: "Details",
+        title: null,
         nav,
         grid,
     })
