@@ -1,0 +1,32 @@
+<% if (title) { %>
+    <h1><%= title %></h1>
+    <% } else {        
+    } %>
+    <%- messages() %>
+    <form id="register-form" class="" action="/account/register" method="post">
+        <div class="formulary">
+            <fieldset>
+            <br>
+            <label for="">First Name: *</label> <br>
+            <input type="text" name="f_name" id="F_Name" required value="<%= locals.f_name %>">
+            <br>
+            
+            <label for="">Last Name: *</label> <br>
+            <input type="text" name="l_name" id="L_Name" required value="<%= locals.l_name %>">
+            <br>
+
+            <label for="">Email Address: *</label> <br>
+            <input type="email" name="email_Address" id="Gmail" required value="<%= locals.email_Address %>">
+            <br>
+            <label for="">Password: *</label> <br>
+            <input type="password" name="password" id="password" required><br>
+            <p>
+                Password must be minimun of 12 characters and include 
+                1 Capital letter, 1 number and 1 special character. 
+            </p>
+        
+            <br>
+            <input type="submit" value="Register" class="btn-register">
+        </fieldset>
+        </div>
+        </form>

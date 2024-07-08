@@ -1,0 +1,29 @@
+<% if (title) { %>
+    <h1><%= title %></h1>
+    <% } else {
+    } %>
+    <%- messages() %>
+    <form id="" class=""  action="/account/login" method="post">
+    <div class="formulary">
+        <fieldset>
+            <br>
+        <label for="">Email Address:</label> <br>
+        <input type="text" name="name" id="Name">
+        <br>
+        <label for="password">Password: </label> <br>
+        <input type="password" name="password" id="password"><br>
+        <p>
+            Password must be minimun of 12 characters and include 
+            1 Capital letter, 1 number and 1 special character. 
+        </p>
+    
+        <input class="btn-password" type="button" value="Show Password" id="passwordBtn">
+        <br>
+        <input type="button" value="Login" class="btn-login">
+    
+    </fieldset>
+    <div class="question">
+        <p>No Account? <a href="/account/register">Sign-up</a></p>
+    </div>
+    </div>
+    </form>
