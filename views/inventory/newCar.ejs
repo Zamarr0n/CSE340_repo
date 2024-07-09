@@ -2,48 +2,49 @@
     <h1><%= title %></h1>
     <% } else {        
     } %>
-    <form id="register-form" class="" action="/account/register" method="post">
+    <%- messages() %>
+    <form id="register-form" class="" action="/inv/NewVehicle" method="post">
         <div class="formulary">
             <fieldset>
             <br>
-            <label for="">Classification: *</label> <br>
-            <select name="classification" id="" name="">
-                <option value="">Select an option</option>
-                <option value="Custom">Custom</option>
-                <option value="Sedan">Sedan</option>
-                <option value="Sport">Sport</option>
-                <option value="SUV">SUV</option>
-                <option value="Truck">Truck</option>
-            </select>
-            <br>
-            
             <label for="">Make: </label> <br>
-            <input type="text" name="" id="" required >
+            <input type="text" name="make" id="" required >
             <br>
 
             <label for="">Model: </label> <br>
-            <input type="text" name="" id="" required >
+            <input type="text" name="Model" id="" required >
             <br>
             <label for="">Description: </label> <br>
-            <input type="text" name="" id="" required><br>
+            <input type="text" name="Description" id="" required><br>
                 
             <label for="">Image Path: </label> <br>
-            <input type="text" name="" id="">
+            <input type="text" name="Image" id="">
             <br>
             <label for="">Thumbnail Path: </label> <br>
-            <input type="text" name="" id="" required><br>
+            <input type="text" name="Thumbnail" id="" required><br>
             <br>
             <label for="">Price: </label> <br>
-            <input type="text" name="" id="" required><br>
+            <input type="text" name="Price" id="" required><br>
             <br>
             <label for="">Year: </label> <br>
-            <input type="text" name="" id="" required><br>
+            <input type="text" name="Year" id="" required><br>
             <br>
             <label for="">Miles: </label> <br>
-            <input type="text" name="" id="" required><br>
+            <input type="number" name="Miles" id="" required><br>
             <br>
             <label for="">Color: </label> <br>
-            <input type="text" name="" id="" required><br>
+            <input type="text" name="Color" id="" required><br>
+            <br>
+            <label for="">Classification: *</label> <br>
+            <select name="classification" id="" name="" required>
+                <option value="">--Select an option--</option>
+                <option name="Custom" value="1">Custom</option>
+                <option name="Sedan" value="5">Sedan</option>
+                <option name="Sport" value="2">Sport</option>
+                <option name="SUV" value="3">SUV</option>
+                <option name="Truck" value="4">Truck</option>
+                <option name="NewClass" value="7">NewClass</option>
+            </select>
             <br>
             <input type="submit" value="Add Car" class="btn-register">
         </fieldset>

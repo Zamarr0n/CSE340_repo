@@ -26,8 +26,29 @@ async function checkExistingEmail(account_email){
     }
 }
 
+// Function to add a new class to the navbar.
 
-module.exports = {registerAccount, checkExistingEmail};
+async function NewClass(new_classification){
+    try {
+      const sql = "INSERT INTO classification (classification_name) VALUES ($1) RETURNING *"
+    return await pool.query(sql, [ new_classification ])
+    } catch (error) {
+    return error.message
+    }
+}
+
+// FUNCTION TO ADD NEW CAR TO THE NEW CLASSIFICATION
+async function NewCar( Make, Model, Description, Image,Thumbnail, Price, Year, Miles, Color, Classification ){
+    try{
+        const sql = "INSERT INTO inventory (inv_make, inv_model, inv_year, inv_description, inv_image, inv_thumbnail, inv_price, inv_miles, inv_color, classification_id) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10) RETURNING *"
+        return await pool.query( sql, [ Make, Model, Year, Description, Image, Thumbnail, Price, Miles, Color,Classification])
+    } catch(err){
+        return err.message
+    }
+}
+
+
+module.exports = {registerAccount, checkExistingEmail, NewClass, NewCar};
 
 
 

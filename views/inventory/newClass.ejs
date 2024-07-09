@@ -2,7 +2,8 @@
     <h1><%= title %></h1>
     <% } else {        
     } %>
-    <form id="" class=""  action="/account/login" method="post">
+    <%- messages() %>
+    <form id="" class=""  action="/inv/NewClassification" method="post">
         <div class="formulary">
             <h1>Field Is Required</h1>
             <fieldset>
@@ -12,7 +13,7 @@
             <label>Name must be alphabetic characters only</label>
             <input type="text" name="newClassification" id="NewClass" required><br>
             <br>
-            <input type="button" value="Add Classification" class="btn-new-Class">
+            <input type="submit" value="Add Classification" class="btn-new-Class">
         
         </fieldset>
         <div class="question">

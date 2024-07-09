@@ -3,11 +3,20 @@ const express = require("express");
 const router = new express.Router(); 
 const invController = require("../controllers/invController");
 
+// Send the user to the links view page
 router.get("/",invController.buildmanagement);
 
+// Send the user to the new classification view page
 router.get("/NewClassification", invController.buildNewClassification);
+// Obtaining the user inputs from the form "Post"
+router.post("/NewClassification", invController.newClass);
 
+// Send the user to the new vehicle view page 
 router.get("/NewVehicle", invController.buildNewCar);
+// Obtaining the user inputs from the form "Post"
+router.post("/NewVehicle", invController.NewCar)
+
+
 
 // Route to build inventory by classification view
 router.get("/type/:classificationId", invController.buildByClassificationId);

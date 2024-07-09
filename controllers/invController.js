@@ -1,5 +1,6 @@
 const invModel = require("../models/inventory-model")
 const utilities = require("../utilities/")
+const newItemsModel = require('../models/account-model');
 
 const invCont = {}
 
@@ -18,6 +19,7 @@ res.render("./inventory/classification", {
     grid,
 })
 }
+
 
 
 // **********************************
@@ -58,6 +60,74 @@ invCont.buildNewCar = async function (req,res) {
         title: 'Add New Car',
         nav
     })
+}
+
+
+
+invCont.newClass = async function (req, res) {
+    let nav = await utilities.getNav()
+    const { newClassification} = req.body
+
+    // Calling the function made in the model of this new classification view.
+    const regResult = await newItemsModel.NewClass(newClassification);
+    if (regResult) {
+        req.flash("notice",`Congratulations, the new Classification was added successfully`)
+        res.status(201).render("./inventory/newClass", {
+            title: "Add New Classification",
+            nav,
+        })
+        } else {
+        req.flash("notice", "Sorry, The new Classification fail.")
+        res.status(501).render("./inventory/newClass", {
+            title: "Add New Classification",
+            nav,
+        })
+        }
+
+}
+
+
+
+invCont.NewCar = async function (req, res){
+    let nav = await utilities.getNav()
+    const {
+        make,
+        Model,
+        Description,
+        Image,
+        Thumbnail,
+        Price,
+        Year, 
+        Miles,
+        Color,
+        classification
+    } = req.body
+
+    const results = await newItemsModel.NewCar(
+        make,
+        Model,
+        Description,
+        Image,
+        Thumbnail,
+        Price,
+        Year, 
+        Miles,
+        Color, 
+        classification
+    )
+    if (results) {
+        req.flash("notice",`Congratulations, The process went successfully :) `)
+        res.status(201).render("./inventory/newCar", {
+            title: "Add a New Car ",
+            nav,
+        })
+        } else {
+        req.flash("notice", "Sorry, there was a problem adding the new car :( .")
+        res.status(501).render("./inventory/newCar", {
+            title: "Add a New Car",
+            nav,
+        })
+        }
 }
 
 module.exports = invCont
