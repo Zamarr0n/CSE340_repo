@@ -37,4 +37,27 @@ let nav = await utilities.getNav()
     })
 }
 
+invCont.buildmanagement = async function(req,res){
+    const nav = await utilities.getNav()
+    res.render('./inventory/management' ,{
+        title: 'Vehicle Management',
+        nav,
+    })
+}
+
+invCont.buildNewClassification = async function (req,res) {
+    const nav = await utilities.getNav()
+    res.render('./inventory/newClass' , {
+        title: 'Add New Classification',
+        nav
+    })
+}
+invCont.buildNewCar = async function (req,res) {
+    const nav = await utilities.getNav()
+    res.render('./inventory/newCar' ,{
+        title: 'Add New Car',
+        nav
+    })
+}
+
 module.exports = invCont

@@ -224,6 +224,13 @@ fieldset > input{
   max-width: 20%;
   cursor: pointer;
 }
+.btn-new-Class{
+  max-width: 40%;
+  cursor: pointer;
+}
+#NewClass{
+  width: 300px;
+}
 .btn-register{
   max-width: 40%;
   cursor: pointer;
