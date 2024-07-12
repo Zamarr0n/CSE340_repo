@@ -17,7 +17,8 @@ const session = require("express-session");
 const pool = require('./database/');
 const account = require('./routes/accountRoute');
 const bodyParser = require("body-parser")
-// const management = require('./routes/managementRoute')
+const cookieParser = require("cookie-parser")
+// const utilities = require("../utilities/")
 
 /* ***********************
  * Routes
@@ -45,8 +46,12 @@ app.use(function(req, res, next){
 });
 
 app.use(bodyParser.json())
+
 app.use(bodyParser.urlencoded({ extended: true })) // for parsing application/x-www-form-urlencoded
 
+app.use(cookieParser())
+
+app.use(utilities.checkJWTToken)
 
 
 app.use(static)
@@ -69,6 +74,7 @@ app.use('/account', account);
 app.use(async (req, res, next) => {
   next({status: 404, message: 'Sorry, we appear to have lost that page.'})
 })
+
 
 
 

@@ -3,15 +3,15 @@
     <% } else {
     } %>
     <%- messages() %>
-    <form id="" class=""  action="/account/login" method="post">
+    <form id="loginForm" class=""  action="/account/login" method="post">
     <div class="formulary">
         <fieldset>
             <br>
         <label for="">Email Address:</label> <br>
-        <input type="text" name="name" id="Name">
+        <input type="email" name="name" id="Name" required>
         <br>
         <label for="password">Password: </label> <br>
-        <input type="password" name="password" id="password"><br>
+        <input type="password" name="password" id="password" pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9])(?!.*\s).{12,}$" required><br>
         <p>
             Password must be minimun of 12 characters and include 
             1 Capital letter, 1 number and 1 special character. 

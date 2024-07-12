@@ -1,6 +1,8 @@
 const utilities = require('../utilities');
 const accountModel = require('../models/account-model');
 const bcrypt = require("bcryptjs");
+const jwt = require("jsonwebtoken")
+require("dotenv").config()
 
 const invCont = {}
 
@@ -15,13 +17,21 @@ invCont.buildLogin = async function (req, res, next) {
     })
 }
 
+/* ****************************************
+*  Deliver registration view
+* *************************************** */
 invCont.buildRegister = async function (req,res,next){
     let nav = await utilities.getNav()
     res.render("./account/register",{
         title: "Register",
         nav,
+        errors: null,
     })
 }
+
+
+
+
 /* ****************************************
 *  Process Registration
 * *************************************** */
@@ -79,6 +89,47 @@ try {
 //     throw new Error("Email exists. Please log in or use different email")
 //     }
 // }),
+
+invCont.loggedin = async function (req,res) {
+    let nav = await utilities.getNav()
+    res.render("./account/accountmanagement",{
+        title: "You're logged in",
+        nav,
+    })
+}
+
+/* ****************************************
+ *  Process login request
+ * ************************************ */
+invCont.accountLogin = async function (req, res) {
+    let nav = await utilities.getNav()
+    const { account_email, account_password } = req.body
+    const accountData = await accountModel.getAccountByEmail(account_email)
+    if (!accountData) {
+    req.flash("notice", "Please check your credentials and try again.")
+    res.status(400).render("account/login", {
+    title: "Login",
+    nav,
+    errors: null,
+    account_email,
+    })
+    return
+    }
+    try {
+    if (await bcrypt.compare(account_password, accountData.account_password)) {
+    delete accountData.account_password
+    const accessToken = jwt.sign(accountData, process.env.ACCESS_TOKEN_SECRET, { expiresIn: 3600 })
+    if(process.env.NODE_ENV === 'development') {
+       res.cookie("jwt", accessToken, { httpOnly: true, maxAge: 3600 * 1000 })
+    } else {
+         res.cookie("jwt", accessToken, { httpOnly: true, secure: true, maxAge: 3600 * 1000 })
+    }
+    return res.redirect("/account/")
+    }
+    } catch (error) {
+    return new Error('Access Forbidden')
+    }
+}
 
 
 module.exports = invCont 

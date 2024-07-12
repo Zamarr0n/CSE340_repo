@@ -3,6 +3,13 @@
     <% } else {        
     } %>
     <%- messages() %>
+    <% if (errors) { %>
+        <ul class="notice">
+    <% errors.array().forEach(error => { %>
+        <li><%= error.msg %></li>
+    <%  }) %>
+    </ul>
+    <% } %>
     <form id="register-form" class="" action="/account/register" method="post">
         <div class="formulary">
             <fieldset>
@@ -19,7 +26,7 @@
             <input type="email" name="email_Address" id="Gmail" required value="<%= locals.email_Address %>">
             <br>
             <label for="">Password: *</label> <br>
-            <input type="password" name="password" id="password" required><br>
+            <input type="password" name="password" id="password" pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9])(?!.*\s).{12,}$" required><br>
             <p>
                 Password must be minimun of 12 characters and include 
                 1 Capital letter, 1 number and 1 special character. 
