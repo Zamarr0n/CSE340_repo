@@ -75,21 +75,6 @@ try {
     }
 }
 
-
-
-// valid email is required and cannot already exist in the database
-// body("account_email")
-//   .trim()
-//   .isEmail()
-//   .normalizeEmail() // refer to validator.js docs
-//   .withMessage("A valid email is required.")
-//   .custom(async (account_email) => {
-//     const emailExists = await accountModel.checkExistingEmail(account_email)
-//     if (emailExists){
-//     throw new Error("Email exists. Please log in or use different email")
-//     }
-// }),
-
 invCont.loggedin = async function (req,res) {
     let nav = await utilities.getNav()
     res.render("./account/accountmanagement",{
@@ -103,20 +88,20 @@ invCont.loggedin = async function (req,res) {
  * ************************************ */
 invCont.accountLogin = async function (req, res) {
     let nav = await utilities.getNav()
-    const { account_email, account_password } = req.body
-    const accountData = await accountModel.getAccountByEmail(account_email)
+    const { email_Address, password } = req.body
+    const accountData = await accountModel.getAccountByEmail(email_Address)
     if (!accountData) {
     req.flash("notice", "Please check your credentials and try again.")
     res.status(400).render("account/login", {
     title: "Login",
     nav,
     errors: null,
-    account_email,
+    email_Address,
     })
     return
     }
     try {
-    if (await bcrypt.compare(account_password, accountData.account_password)) {
+    if (await bcrypt.compare(password, accountData.account_password)) {
     delete accountData.account_password
     const accessToken = jwt.sign(accountData, process.env.ACCESS_TOKEN_SECRET, { expiresIn: 3600 })
     if(process.env.NODE_ENV === 'development') {
@@ -124,12 +109,15 @@ invCont.accountLogin = async function (req, res) {
     } else {
          res.cookie("jwt", accessToken, { httpOnly: true, secure: true, maxAge: 3600 * 1000 })
     }
-    return res.redirect("/account/")
+    return res.redirect("/account/management")
     }
     } catch (error) {
     return new Error('Access Forbidden')
     }
 }
+// emiliozama@gmail.com
+// G7f@w8kL1z#2
+
 
 
 module.exports = invCont 

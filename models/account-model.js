@@ -63,7 +63,7 @@ async function getAccountByEmail (account_email) {
 
 
 
-module.exports = {registerAccount, checkExistingEmail, NewClass, NewCar};
+module.exports = {registerAccount, checkExistingEmail, NewClass, NewCar, getAccountByEmail};
 
 
 

@@ -2,6 +2,8 @@ const utilities = require(".")
 const { body, validationResult } = require("express-validator")
 const accountModel = require("../models/account-model")
 
+
+
 const validate = {}
 
 
@@ -11,7 +13,7 @@ const validate = {}
 validate.registationRules = () => {
     return [
       // firstname is required and must be string
-    body("account_firstname")
+    body("f_name")
         .trim()
         .escape()
         .notEmpty()
@@ -19,15 +21,15 @@ validate.registationRules = () => {
         .withMessage("Please provide a first name."), // on error this message is sent.
   
       // lastname is required and must be string
-    body("account_lastname")
+    body("l_name")
         .trim()
         .escape()
         .notEmpty()
         .isLength({ min: 2 })
         .withMessage("Please provide a last name."), // on error this message is sent.
-  
+
      // valid email is required and cannot already exist in the database
-    body("account_email")
+    body("email_Address")
     .trim()
     .isEmail()
     .normalizeEmail() // refer to validator.js docs
@@ -39,7 +41,7 @@ validate.registationRules = () => {
         }
     }),
       // password is required and must be strong password
-    body("account_password")
+    body("password")
         .trim()
         .notEmpty()
         .isStrongPassword({
@@ -53,6 +55,34 @@ validate.registationRules = () => {
     ]
 }
 
+validate.loginRules = () => {
+    return [
+         // valid email is required and cannot already exist in the database
+    body("email_Address")
+    .trim()
+    .isEmail()
+    .normalizeEmail() // refer to validator.js docs
+    .withMessage("A valid email is required.")
+    .custom(async (account_email) => {
+    const emailExists = await accountModel.checkExistingEmail(account_email)
+        if (emailExists){
+            console.log("Access");
+        }
+    }),
+       // password is required and must be strong password
+    body("password")
+        .trim()
+        .notEmpty()
+        .isStrongPassword({
+        minLength: 12,
+        minLowercase: 1,
+        minUppercase: 1,
+        minNumbers: 1,
+        minSymbols: 1,
+        })
+        .withMessage("Password does not meet requirements."),
+    ]
+}
 
 
   /* ******************************
@@ -71,6 +101,23 @@ validate.checkRegData = async (req, res, next) => {
         account_firstname,
         account_lastname,
         account_email,
+    })
+    return
+    }
+    next()
+}
+
+validate.checkLoginData = async (req, res, next) => {
+    const { email_Address } = req.body
+    let errors = []
+    errors = validationResult(req)
+    if (!errors.isEmpty()) {
+    let nav = await utilities.getNav()
+    res.render("account/login", {
+        errors,
+        title: "Logged",
+        nav,
+        email_Address,
     })
     return
     }
