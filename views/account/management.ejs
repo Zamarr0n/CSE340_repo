@@ -3,7 +3,19 @@
     <% } else {
     } %>
     <%- messages() %>
-    <h2>You´re logged in </h2>
+    <ul>
+        <li><a href="/inventory/newClass" title="Click to add a new classification">Add new classification</a></li>
+        <li><a href="/inventory/newCar" title="Click to add a new vehicle">Add new vehicle</a></li>
+    </ul>
+    <h2>Manage inventory</h2>
+    <p>Choose a classification to see those inventory items.</p>
+    <%- classificationSelect %>
+    <table id="inventoryDisplay"></table>
+
+    <noscript>Javascript must be enabled to use this page</noscript>
+
+    <script src="../../public/js/inventory.js"></script>
+    <!-- <h2>You´re logged in </h2> -->
 
 
 

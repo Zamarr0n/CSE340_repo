@@ -3,8 +3,9 @@ const express = require('express');
 const router = new express.Router();
 const accountController = require('../controllers/accountController');
 const regValidate = require('../utilities/account-validation')
+const utilities = require('../utilities/index')
 
-router.get("/", accountController.accountLogin);
+router.get("/management", utilities.handleErrors(accountController.accountLogin));
 
 router.get("/login", accountController.buildLogin);
 router.get("/register", accountController.buildRegister);

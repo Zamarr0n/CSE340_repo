@@ -91,25 +91,29 @@ invCont.accountLogin = async function (req, res) {
     const { email_Address, password } = req.body
     const accountData = await accountModel.getAccountByEmail(email_Address)
     console.log("GOT AN ACCOUNT DATA", accountData);
-    if (!accountData) {
-    console.log("No data")
-    req.flash("notice", "Please check your credentials and try again.")
-    res.status(400).render("account/login", {
-    title: "Login",
-    nav,
-    errors: null,
-    email_Address,
+    // if(email_Address == " "){
+    //     console.log("2nd submit");
+    // }
+    if (email_Address == ' ' & !accountData) {
+        console.log("No data")
+        req.flash("notice", "Please check your credentials and try again.")
+        res.status(400).render("account/login", {
+        title: "Login",
+        nav,
+        errors: null,
+        email_Address,
     })
-    return }
+    return
+}
     
     try {
         console.log('try block');
-    if (await bcrypt.compare(password, accountData[0].account_password)) {
-    console.log(delete accountData.account_password)
-    delete accountData.account_password
-    console.log('inside the if statement')
+    if (await bcrypt.compare(password, accountData.account_password)) {
+        delete accountData.account_password
+        console.log('inside the if statement')
     // here is where froze again
-    const accessToken = jwt.sign(accountData, process.env.ACCESS_TOKEN_SECRET, { expiresIn: 3600 })
+        const accessToken = jwt.sign(accountData, process.env.ACCESS_TOKEN_SECRET, { expiresIn: 3600 })
+        
     // here is where froze again
     if(process.env.NODE_ENV === 'development') {
        res.cookie("jwt", accessToken, { httpOnly: true, maxAge: 3600 * 1000 })
@@ -117,23 +121,24 @@ invCont.accountLogin = async function (req, res) {
          res.cookie("jwt", accessToken, { httpOnly: true, secure: true, maxAge: 3600 * 1000 })
     }
     console.log("With data");
-    return res.redirect("/account/")
+    return res.redirect("/account/management")
     }else{
         console.log('else statement');
-    req.flash("notice", "Please check your password and try again.")
-    res.status(400).render("./account/login", {
-    title: "Login",
-    nav,
-    errors: null,
-    email_Address,
-    password,
+        req.flash("notice", "Please check your password and try again.")
+        res.status(400).render("./account/login", {
+        title: "Login",
+        nav,
+        errors: null,
+        email_Address,
+        password,
     })
     }
     } catch (error) {
-    return new Error('Access Forbidden')
+        throw new Error('Access Forbidden')
     }
 }
-// emiliozama@gmail.com
+// Account I´m using:
+// zamaemi@gmail.com
 // G7f@w8kL1z#2
 
 

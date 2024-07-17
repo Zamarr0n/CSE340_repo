@@ -5,6 +5,10 @@ const invController = require("../controllers/invController");
 
 // Send the user to the links view page
 router.get("/",invController.buildmanagement);
+// get inventory
+router.get("/getInventory/:classification_id", invController.getInventoryJSON)
+// Route to edit Items:
+// router.get('/edit/:inventoryid',invController.editItem)
 
 // Send the user to the new classification view page
 router.get("/NewClassification", invController.buildNewClassification);
