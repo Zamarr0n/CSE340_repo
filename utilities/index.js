@@ -146,17 +146,16 @@ Util.checkLogin = (req, res, next) => {
 }
 
 
-Util.buildClassificationList = (data) =>{
+Util.buildClassificationList = () => {
     let grid
-    if(data.length > 0){
-    grid += '<ul>'
+    grid += '<select id="classificationList">'
     data.forEach(vehicle => { 
-        grid += `<li> ${vehicle.inv_name} </li>`
+        grid += 
+        `<option value=${vehicle.classification_id}> 
+        ${vehicle.classification_name} 
+        </option>`
         })
-    grid += '</ul>'
-    }else{ 
-        grid += '<p class="notice">Sorry, no matching vehicles could be found.</p>'
-    }
+    grid += '</select>'
     return grid
 }
 
