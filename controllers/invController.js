@@ -1,7 +1,7 @@
 const invModel = require("../models/inventory-model")
 const utilities = require("../utilities/")
 const newItemsModel = require('../models/account-model');
-
+const inv_model = require('../models/inventory-model')
 const invCont = {}
 
 /* ***************************
@@ -42,15 +42,7 @@ let nav = await utilities.getNav()
     })
 }
 
-invCont.buildmanagement = async function(req,res){
-    const nav = await utilities.getNav()
-    const classificationSelect = await utilities.buildClassificationList()
-    res.render('./inventory/management' ,{
-        title: 'Vehicle Management',
-        nav,
-        classificationSelect,
-    })
-}
+
 
 invCont.buildNewClassification = async function (req,res) {
     const nav = await utilities.getNav()
@@ -90,8 +82,35 @@ invCont.newClass = async function (req, res) {
         }
 
 }
+invCont.buildmanagement = async function (req,res) {
+    const nav = await utilities.getNav()
+        res.render('./inventory/management' ,{
+            title: 'Vehicle Management',
+            nav,
+        })
+}
 
-
+invCont.managementList = async function(req,res){
+    const nav = await utilities.getNav()
+    const {classification_id} = req.body
+    const data_results = await inv_model.getInventoryByClassificationId(classification_id)
+    // const data = await utilities.getClassifications();
+    const classificationSelect = await utilities.buildClassificationList(data_results)
+    if(classificationSelect) {
+        req.flash("notice"," You can see the list now: ")
+        res.status(201).render('./inventory/management' ,{
+            title: 'Vehicle Management',
+            nav,
+            classificationSelect,
+        })
+    } else{
+        req.flash("notice", "Sorry, there was a problem searching the car list :( .")
+        res.status(501).render('./inventory/management' ,{
+            title: 'Vehicle Management',
+            nav,
+        })
+    }
+}
 
 invCont.NewCar = async function (req, res){
     let nav = await utilities.getNav()

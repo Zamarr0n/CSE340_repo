@@ -146,6 +146,20 @@ Util.checkLogin = (req, res, next) => {
 }
 
 
+Util.buildClassificationList = (data) =>{
+    let grid
+    if(data.length > 0){
+    grid += '<ul>'
+    data.forEach(vehicle => { 
+        grid += `<li> ${vehicle.inv_name} </li>`
+        })
+    grid += '</ul>'
+    }else{ 
+        grid += '<p class="notice">Sorry, no matching vehicles could be found.</p>'
+    }
+    return grid
+}
+
 /* ****************************************
  * Middleware For Handling Errors
  * Wrap other function in this for 

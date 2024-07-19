@@ -77,7 +77,7 @@ try {
 
 invCont.loggedin = async function (req,res) {
     let nav = await utilities.getNav()
-    res.render("./account/accountmanagement",{
+    res.render("./account/management",{
         title: "You're logged in",
         nav,
     })
@@ -134,7 +134,7 @@ invCont.accountLogin = async function (req, res) {
     })
     }
     } catch (error) {
-        throw new Error('Access Forbidden')
+        throw Error('Access Forbidden')
     }
 }
 // Account I´m using:

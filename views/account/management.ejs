@@ -9,6 +9,16 @@
     </ul>
     <h2>Manage inventory</h2>
     <p>Choose a classification to see those inventory items.</p>
+    <select name="classification_id" id="" required>
+        <option value=""> --Select an option -- </option>
+        <option name="Custom" value="1">Custom</option>
+        <option name="Sport" value="2">Sport</option>
+        <option name="SUV" value="3">SUV</option>
+        <option name="Truck" value="4">Truck</option>
+        <option name="Sedan" value="5">Sedan</option>
+        <option name="NewClass" value="7">NewClass</option>
+    </select>
+
     <%- classificationSelect %>
     <table id="inventoryDisplay"></table>
 
