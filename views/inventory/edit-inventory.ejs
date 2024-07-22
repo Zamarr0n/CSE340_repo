@@ -1,0 +1,52 @@
+<% if (title) { %>
+    <h1><%= title %></h1>
+    <% } else {        
+    } %>
+    <%- messages() %>
+<form id="register-form" class="" action="/inv/update" method="post">
+    <div class="formulary">
+        <fieldset>
+        <br>
+        <label for="make">Make: </label> <br>
+        <input type="text" name="make" id="make" required  <% if(locals.make) { %> value="<%= locals.make %>" <% } %>>
+        <br>
+        <label for="Model">Model: </label> <br>
+        <input type="text" name="Model" id="Model" required <% if(locals.Model) { %> value="<%= locals.Model %>" <% } %> >
+        <br>
+        <label for="Desc">Description: </label> <br>
+        <input type="text" name="Description" id="Desc" minlength="3" required  <% if(locals.Description) { %> value="<%= locals.Description %>" <% } %>><br>
+            
+        <label for="ima">Image Path: </label> <br>
+        <input type="text" name="Image" id="ima"   <% if(locals.Image) { %> value="<%= locals.Image %>" <% } %> >
+        <br>
+        <label for="thumb">Thumbnail Path: </label> <br>
+        <input type="text" name="Thumbnail" id="thumb" required  <% if(locals.Thumbnail) { %> value="<%= locals.Thumbnail %>" <% } %>><br>
+        <br>
+        <label for="price">Price: </label> <br>
+        <input type="number" name="Price" id="price" required  <% if(locals.Price) { %> value="<%= locals.Price %>" <% } %> ><br>
+        <br>
+        <label for="year">Year: </label> <br>
+        <input type="text" name="Year" id="year" required   <% if(locals.Year) { %> value="<%= locals.Year %>" <% } %> ><br>
+        <br>
+        <label for="miles">Miles: </label> <br>
+        <input type="number" name="Miles" id="miles" required  <% if(locals.Miles) { %> value="<%= locals.Miles %>" <% } %> ><br>
+        <br>
+        <label for="color">Color: </label> <br>
+        <input type="text" name="Color" id="color" required  <% if(locals.Color) { %> value="<%= locals.Color %>" <% } %> ><br>
+        <br>
+        <label for="class">Classification: *</label> <br>
+        <select name="classification" id="class" required  <% if(locals.classification) { %> value="<%= locals.classification %>" <% } %>>
+            <option value="">--Select an option--</option>
+            <option name="Custom" value="1">Custom</option>
+            <option name="Sedan" value="5">Sedan</option>
+            <option name="Sport" value="2">Sport</option>
+            <option name="SUV" value="3">SUV</option>
+            <option name="Truck" value="4">Truck</option>
+            <option name="NewClass" value="7">NewClass</option>
+        </select>
+        <br>
+        <input type="submit" value="Update Vehicle" class="btn-register" id="submit-btn">
+        <input type="hidden" name="inv_id" value="<%= locals.inv_id %>" >
+    </fieldset>
+    </div>
+    </form>

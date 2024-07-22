@@ -146,15 +146,16 @@ Util.checkLogin = (req, res, next) => {
 }
 
 
-Util.buildClassificationList = () => {
+Util.buildClassificationList = async () => {
+    const data = await invModel.getClassifications();
     let grid
     grid += '<select id="classificationList">'
-    data.forEach(vehicle => { 
-        grid += 
-        `<option value=${vehicle.classification_id}> 
+    grid += '<option value="none" > -- Select a classification -- </option>'
+    data.rows.forEach(vehicle => {
+        grid +=`<option value= ${vehicle.classification_id}> 
         ${vehicle.classification_name} 
         </option>`
-        })
+    })
     grid += '</select>'
     return grid
 }

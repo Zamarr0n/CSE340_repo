@@ -3,6 +3,7 @@ const accountModel = require('../models/account-model');
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken")
 require("dotenv").config()
+var cookieParser = require('cookie-parser')
 
 const invCont = {}
 
@@ -77,8 +78,9 @@ try {
 
 invCont.loggedin = async function (req,res) {
     let nav = await utilities.getNav()
+    const account = accountModel.getAccountByEmail()
     res.render("./account/management",{
-        title: "You're logged in",
+        title: "Account Management",
         nav,
     })
 }
@@ -90,12 +92,10 @@ invCont.accountLogin = async function (req, res) {
     let nav = await utilities.getNav()
     const { email_Address, password } = req.body
     const accountData = await accountModel.getAccountByEmail(email_Address)
-    console.log("GOT AN ACCOUNT DATA", accountData);
-    // if(email_Address == " "){
-    //     console.log("2nd submit");
-    // }
+    // console.log(accountData.account_firstname);
+    console.log(req.cookies)
+    console.log(req.signedCookies)
     if (email_Address == ' ' & !accountData) {
-        console.log("No data")
         req.flash("notice", "Please check your credentials and try again.")
         res.status(400).render("account/login", {
         title: "Login",
@@ -107,10 +107,8 @@ invCont.accountLogin = async function (req, res) {
 }
     
     try {
-        console.log('try block');
     if (await bcrypt.compare(password, accountData.account_password)) {
         delete accountData.account_password
-        console.log('inside the if statement')
     // here is where froze again
         const accessToken = jwt.sign(accountData, process.env.ACCESS_TOKEN_SECRET, { expiresIn: 3600 })
         
@@ -120,7 +118,7 @@ invCont.accountLogin = async function (req, res) {
     } else {
          res.cookie("jwt", accessToken, { httpOnly: true, secure: true, maxAge: 3600 * 1000 })
     }
-    console.log("With data");
+    // console.log("signed cookies: " + req.signedCookies);
     return res.redirect("/account/management")
     }else{
         console.log('else statement');

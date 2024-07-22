@@ -4,8 +4,10 @@ const router = new express.Router();
 const accountController = require('../controllers/accountController');
 const regValidate = require('../utilities/account-validation')
 const utilities = require('../utilities/index')
+var cookieParser = require('cookie-parser')
 
 router.get("/management",utilities.checkLogin, utilities.handleErrors(accountController.loggedin));
+
 // utilities.checkLogin,
 router.get("/login", accountController.buildLogin);
 router.get("/register", accountController.buildRegister);

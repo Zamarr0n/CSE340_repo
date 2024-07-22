@@ -1,0 +1,39 @@
+<% if (title) { %>
+    <h1><%= title %></h1>
+    <% } else {        
+    } %>
+    <%- messages() %>
+    <p>Confirm Deletion - The deletion is permanent </p>
+<form id="delete-form" class="" action="/inv/deleteItem" method="post">
+    <div class="formulary">
+        <fieldset>
+        <br>
+        <label for="make">Make: </label> <br>
+        <input type="text" name="make" id="make" readonly required  <% if(locals.make) { %> value="<%= locals.make %>" <% } %>>
+        <br>
+        <label for="Model">Model: </label> <br>
+        <input type="text" name="Model" id="Model" readonly required <% if(locals.Model) { %> value="<%= locals.Model %>" <% } %> >
+        <br>    
+        <label for="price">Price: </label> <br>
+        <input type="number" name="Price" id="price" readonly required  <% if(locals.Price) { %> value="<%= locals.Price %>" <% } %> ><br>
+        <br>
+        <label for="year">Year: </label> <br>
+        <input type="text" name="Year" id="year" readonly required   <% if(locals.Year) { %> value="<%= locals.Year %>" <% } %> ><br>
+        <br>
+        <input type="submit" value="Delete Vehicle" class="btn-register" id="submit-btn">
+        <input type="hidden" name="inv_id" value="<%= locals.inv_id %>" >
+    </fieldset>
+
+
+
+
+
+
+
+
+
+
+
+
+
+

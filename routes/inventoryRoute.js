@@ -2,15 +2,27 @@
 const express = require("express");
 const router = new express.Router(); 
 const invController = require("../controllers/invController");
+const utilities = require("../utilities/index");
+
 
 // Send the user to the links view page
 router.get("/",invController.buildmanagement);
 
+
+router.get("/delete/:inv_id", invController.deleteView);
+
+
+router.post("/deleteItem", invController.deleteItem);
 // router.post("/", invController.managementList);
+
 // get inventory
-router.get("/getInventory/:classification_id", invController.getInventoryJSON)
+router.get("/getInventory/:classification_id",  utilities.handleErrors(invController.getInventoryJSON))
+
+
 // Route to edit Items:
-// router.get('/edit/:inventoryid',invController.editItem)
+router.get('/edit/:inv_id',invController.editInventoryView)
+// match the link of the update form.
+router.post("/update/", invController.updateInventory)
 
 // Send the user to the new classification view page
 router.get("/NewClassification", invController.buildNewClassification);
