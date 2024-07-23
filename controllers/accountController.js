@@ -92,9 +92,6 @@ invCont.accountLogin = async function (req, res) {
     let nav = await utilities.getNav()
     const { email_Address, password } = req.body
     const accountData = await accountModel.getAccountByEmail(email_Address)
-    // console.log(accountData.account_firstname);
-    console.log(req.cookies)
-    console.log(req.signedCookies)
     if (email_Address == ' ' & !accountData) {
         req.flash("notice", "Please check your credentials and try again.")
         res.status(400).render("account/login", {

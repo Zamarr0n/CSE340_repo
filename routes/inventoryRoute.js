@@ -6,7 +6,7 @@ const utilities = require("../utilities/index");
 
 
 // Send the user to the links view page
-router.get("/",invController.buildmanagement);
+router.get("/", utilities.checkUserType, invController.buildmanagement);
 
 
 router.get("/delete/:inv_id", invController.deleteView);

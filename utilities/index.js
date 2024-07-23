@@ -123,15 +123,45 @@ Util.checkJWTToken = (req, res, next) => {
         res.clearCookie("jwt")
         return res.redirect("/account/login")
     }
-    res.locals.accountData = accountData
+    res.locals.accountData = accountData.account_firstname;
+    // res.locals.accountType = accountData.account_type;
+    console.log("checkJWTToken: ");
+    console.log(res.locals.accountData);
     res.locals.loggedin = 1
+    // if(res.locals.accountType == 'Client'){
+    //     console.log("Access Denied");
+    // }
     next()
     })
     } else {
     next()
     }
 }
+// {
+//     account_id: 32,
+//     account_firstname: 'emi',
+//     account_lastname: 'zama',
+//     account_email: 'zamaemi@gmail.com',
+//     account_type: 'Client',
+//     account_password: '$2a$10$8t9ue2vsLunzJS8pgNNShOdI9DYe0pWTX6rYF8wC9nUruDDzfShv2'
+//   }
 
+Util.checkUserType = (req, res, next) => {
+    if (req.cookies.jwt) {
+        jwt.verify( req.cookies.jwt, process.env.ACCESS_TOKEN_SECRET,
+            function (err, accountType) {
+            res.locals.accountType = accountType.account_type;
+            console.log(accountType.account_type);
+            if (res.locals.account_type == 'Client') {
+            console.log("Client");
+            return res.redirect("/account/login")
+        }
+        next()
+        })
+        } else {
+        next()
+        }
+}
 
 /* ****************************************
  *  Check Login

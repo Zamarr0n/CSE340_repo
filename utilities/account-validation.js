@@ -108,7 +108,7 @@ validate.checkRegData = async (req, res, next) => {
 }
 
 validate.checkLoginData = async (req, res, next) => {
-    const { email_Address } = req.body
+    const { email_Address} = req.body
     let errors = []
     errors = validationResult(req)
     if (!errors.isEmpty()) {
@@ -117,7 +117,7 @@ validate.checkLoginData = async (req, res, next) => {
         errors,
         title: "Logged",
         nav,
-        email_Address,
+        email_Address
     })
     return
     }
