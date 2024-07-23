@@ -78,7 +78,6 @@ try {
 
 invCont.loggedin = async function (req,res) {
     let nav = await utilities.getNav()
-    const account = accountModel.getAccountByEmail()
     res.render("./account/management",{
         title: "Account Management",
         nav,
@@ -136,7 +135,13 @@ invCont.accountLogin = async function (req, res) {
 // zamaemi@gmail.com
 // G7f@w8kL1z#2
 
-
+invCont.Update = async (req,res) =>{
+    const nav = await utilities.getNav();
+    res.render("./account/accountUpdate", {
+        title: "Update Information",
+        nav
+    })
+}
 
 
 module.exports = invCont 

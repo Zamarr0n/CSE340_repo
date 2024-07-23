@@ -5,7 +5,7 @@
 -- SELECT account_id, account_firstname, account_lastname, account_email, account_type, account_password FROM account WHERE account_email = 'emiliozama@gmail.com'
 
 -- DELETE FROM INVENTORY WHERE inv_id = 50;
-SELECT * FROM inventory;
+SELECT * FROM account;
 -- custom - 1
 -- sport - 2 
 -- SUV - 3

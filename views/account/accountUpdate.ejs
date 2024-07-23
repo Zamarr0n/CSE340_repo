@@ -1,0 +1,33 @@
+<% if (title) { %>
+    <h1><%= title %></h1>
+    <% } else { %>
+    <% } %>
+    <form id="update-form" class="" action="/account/accountUpdate" method="post">
+        <div class="formulary">
+            <fieldset>
+            <br>
+            <label for="F_Name">First Name: *</label> <br>
+            <input type="text" name="f_name" id="F_Name" required value="<%= locals.f_name %>">
+            <br>
+            
+            <label for="L_Name">Last Name: *</label> <br>
+            <input type="text" name="l_name" id="L_Name" required value="<%= locals.l_name %>">
+            <br>
+
+            <label for="Gmail">Email Address: *</label> <br>
+            <input type="email" name="email_Address" id="Gmail" required value="<%= locals.email_Address %>">
+            
+            <br>
+            <input type="submit" value="Register" class="btn-register">
+        </fieldset>
+        </div>
+        </form>
+
+        <form id="updatePassword-form" action="/account/accountUpdate" action="post" >
+        <label for="password">Password: *</label> <br>
+            <input type="password" name="password" id="password" pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9])(?!.*\s).{12,}$" required><br>
+            <p>
+                Password must be minimun of 12 characters and include 
+                1 Capital letter, 1 number and 1 special character. 
+            </p>
+        </form>

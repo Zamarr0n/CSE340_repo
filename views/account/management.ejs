@@ -1,12 +1,13 @@
 <% if (title) { %>
-    <h1><%= title %></h1>
+    <h1><%= title %> </h1>
     <% } else {
     } %>
     <%- messages() %>
-    <ul>
-        <li><a href="/inventory/newClass" title="Click to add a new classification">Add new classification</a></li>
-        <li><a href="/inventory/newCar" title="Click to add a new vehicle">Add new vehicle</a></li>
-    </ul>
+    <h3> Welcome <%- locals.accountData %> </h3>
+    
+    <p>You are logged in </p>
+
+    <a href="/account/update">Edit Account Information </a>
 
 
 

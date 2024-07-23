@@ -148,20 +148,24 @@ Util.checkJWTToken = (req, res, next) => {
 
 Util.checkUserType = (req, res, next) => {
     if (req.cookies.jwt) {
-        jwt.verify( req.cookies.jwt, process.env.ACCESS_TOKEN_SECRET,
-            function (err, accountType) {
-            res.locals.accountType = accountType.account_type;
-            console.log(accountType.account_type);
-            if (res.locals.account_type == 'Client') {
-            console.log("Client");
-            return res.redirect("/account/login")
-        }
-        next()
-        })
-        } else {
-        next()
-        }
-}
+        jwt.verify(req.cookies.jwt, process.env.ACCESS_TOKEN_SECRET, (err, decoded) => {
+            if (err) {
+                console.log("Invalid token");
+                return res.redirect("/account/login");
+            }
+            res.locals.accountType = decoded.account_type;
+            console.log(decoded.account_type);
+
+            if (res.locals.accountType === 'Client') {
+                return res.redirect("/account/management");
+            }
+
+            next();
+        });
+    } else {
+        next();
+    }
+};
 
 /* ****************************************
  *  Check Login
