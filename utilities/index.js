@@ -123,10 +123,15 @@ Util.checkJWTToken = (req, res, next) => {
         res.clearCookie("jwt")
         return res.redirect("/account/login")
     }
-    res.locals.accountData = accountData.account_firstname;
+    res.locals.accountData = accountData.account_firstname
+    res.locals.accountId = accountData.account_id
+    res.locals.accountLastName = accountData.account_lastname
+
     // res.locals.accountType = accountData.account_type;
     console.log("checkJWTToken: ");
     console.log(res.locals.accountData);
+    console.log(res.locals.accountId);
+    console.log(res.locals.accountLastName);
     res.locals.loggedin = 1
     // if(res.locals.accountType == 'Client'){
     //     console.log("Access Denied");
