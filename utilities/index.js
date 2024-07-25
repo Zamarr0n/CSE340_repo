@@ -126,7 +126,7 @@ Util.checkJWTToken = (req, res, next) => {
     res.locals.accountData = accountData.account_firstname
     res.locals.accountId = accountData.account_id
     res.locals.accountLastName = accountData.account_lastname
-
+    res.locals.accountPassword = accountData.account_password
     // res.locals.accountType = accountData.account_type;
     console.log("checkJWTToken: ");
     console.log(res.locals.accountData);

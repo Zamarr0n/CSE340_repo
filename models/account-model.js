@@ -1,3 +1,4 @@
+const { user } = require("pg/lib/defaults");
 const pool = require("../database");
 
 
@@ -60,9 +61,34 @@ async function getAccountByEmail (account_email) {
     }
 }
 
+async function getAccountById (account_id) {
+    try {
+        const sql = 'SELECT account_id, account_firstname, account_lastname, account_email, account_type, account_password FROM account WHERE account_id = $1'
+    const result = await pool.query(sql ,[account_id])
+    return result.rows[0]
+    } catch (error) {
+        throw new Error("No matching userId found")
+    }
+}
 
+async function UpdateUser(f_name, l_name, email_Address, Id) {
+    try{
+        const sql = 'UPDATE account SET account_firstname = $1, account_lastname = $2, account_email = $3 WHERE account_id = $4 RETURNING *'
+        return await pool.query(sql, [f_name, l_name, email_Address, Id])
+    } catch (err){
+        return err.message
+    }
+}
+async function Update_Password(password, user_id) {
+    try{
+        const sql = 'UPDATE account SET account_password = $1 WHERE account_id = $2 RETURNING *'
+        return await pool.query(sql, [password, user_id])
+    } catch(err){
+        err.message
+    }
+}
 
-module.exports = {registerAccount, checkExistingEmail, NewClass, NewCar, getAccountByEmail};
+module.exports = {registerAccount, checkExistingEmail, NewClass, NewCar, getAccountByEmail, getAccountById, UpdateUser, Update_Password};
 
 
 

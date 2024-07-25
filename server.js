@@ -62,7 +62,12 @@ app.use(expressLayouts)
 app.set("layout", "./layouts/layout") // not at views root
 // Index Route
 app.get("/", utilities.handleErrors(baseController.buildHome))
-
+app.get("/logout", (req,res) => {
+  res.clearCookie('sessionId'); 
+  res.clearCookie('jwt'); 
+  console.log('cookie erased');
+  res.redirect("/")
+})
 // Inventory routes
 app.use("/inv", inventoryRoute);
 

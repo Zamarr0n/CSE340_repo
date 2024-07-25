@@ -2,7 +2,7 @@
     <h1><%= title %></h1>
     <% } else { %>
     <% } %>
-    <form id="update-form" class="" action="/account/accountUpdate" method="post">
+    <form id="update-form" class="" action="/account/updateuser" method="post">
         <div class="formulary">
             <fieldset>
             <br>
@@ -17,17 +17,21 @@
             <label for="Gmail">Email Address: *</label> <br>
             <input type="email" name="email_Address" id="Gmail" required value="<%= locals.email_Address %>">
             
+            <input type="hidden"  name="userId" id="password" value="<%= locals.userId %>" ><br>
+            
             <br>
-            <input type="submit" value="Register" class="btn-register">
+            <input type="submit" value="Update Account" class="btn-register">
         </fieldset>
         </div>
         </form>
 
-        <form id="updatePassword-form" action="/account/accountUpdate" action="post" >
+        <form id="updatePassword-form" action="/account/password" method="post" >
         <label for="password">Password: *</label> <br>
-            <input type="password" name="password" id="password" pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9])(?!.*\s).{12,}$" required><br>
+            <input type="password" name="password" id="password" pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9])(?!.*\s).{12,}$" ><br>
             <p>
                 Password must be minimun of 12 characters and include 
                 1 Capital letter, 1 number and 1 special character. 
             </p>
+            <input type="hidden"  name="userIdPassword" id="Idpassword" value="<%= locals.userIdPassword %>" ><br>
+            <input type="submit" value="Update Password" class="btn-register">
         </form>
